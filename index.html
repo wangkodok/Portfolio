@@ -8,10 +8,58 @@
     <link rel="stylesheet" href="common/reset.css" />
     <link rel="stylesheet" href="common/common.css" />
     <link rel="stylesheet" href="css/work.css" />
+
+    <!-- jquery cdn -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js" integrity="sha256-lSjKY0/srUM9BE3dPm+c4fBo1dky2v27Gdjm2uoZaL0=" crossorigin="anonymous"></script>
+
+    <!-- jquery loading 플러그인 -->
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+
+    <!-- page transition 플러그인 animsition.css -->
+    <link rel="stylesheet" href="motion-css/animsition.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="motion-js/animsition.min.js"></script>
+
+    <!-- lsPreloader 플러그인 -->
+    <!-- <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="js/lsPreloader.js"></script> -->
+
     <title>포트폴리오</title>
+    <style>
+      /* 페이지 로딩 스피너 CSS */
+      .loading {
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        position: fixed;
+        display: block;
+        opacity: 1;
+        background: #ffffff;
+        z-index: 100;
+      }
+
+      .loading.hide {
+        position: static;
+      }
+    
+      .loading .login-loading {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 101;
+        width: auto;
+      }
+  </style>
   </head>
-  <body>
-    <div class="wrapper">
+  <body id="loading" class="loading animsition" data-animsition-in-class="fade-in" data-animsition-in-duration="3000">
+
+    <!-- 페이지 로딩 스피너 -->
+    <img src="image/login.gif" class="login-loading" alt="login-loading">
+
+    <div id="wrapper" class="wrapper">
       <header class="header">
         <div class="content-inner">
           <div class="cotnent-head">
@@ -115,6 +163,63 @@
         </div>
       </footer>
     </div>
+
     <script src="js/sub.js"></script>
+
+    <script>
+      $(window).load(function () {
+        $('.loading').show();
+      });
+
+      $(document).ready(function() {
+        // 페이지 로딩 스피너
+        $('.loading').hide();
+        $('.loading').addClass('hide');
+        $('.loading .login-loading').hide();
+
+        // 페이지 로딩 시 애니메이션
+        $(".animsition").animsition({
+          inClass: 'fade-in',
+          outClass: 'fade-out',
+          inDuration: 1500,
+          outDuration: 800,
+          linkElement: '.animsition-link',
+          // e.g. linkElement: 'a:not([target="_blank"]):not([href^="#"])'
+          loading: true,
+          loadingParentElement: 'body', //animsition wrapper element
+          loadingClass: 'animsition-loading',
+          loadingInner: '', // e.g '<img src="loading.svg" />'
+          timeout: false,
+          timeoutCountdown: 5000,
+          onLoadEvent: true,
+          browser: [ 'animation-duration', '-webkit-animation-duration'],
+          // "browser" option allows you to disable the "animsition" in case the css property in the array is not supported by your browser.
+          // The default setting is to disable the "animsition" in a browser that does not support "animation-duration".
+          overlay : false,
+          overlayClass : 'animsition-overlay-slide',
+          overlayParentElement : 'body',
+          transition: function(url){ window.location.href = url; }
+        });
+
+        // $("#wrapper").lsPreloader({
+        //   backgroundColor: "#000",
+        //   backgroundImage: "",
+        //   backgroundRepeat: "repeat",
+        //   logoImage: "",
+        //   progressShow: true,
+        //   progressColor: "#FFF",
+        //   progressHeight: "10px",
+        //   progressPosition: "bottom",
+        //   percentShow: true,
+        //   percentFontFamily: "Verdana, Geneva, sans-serif",
+        //   percentFontSize: "50px",
+        //   animationComplete: "fade",
+        //   minimumTime: .5,
+        //   onStart: function(){},
+        //   onComplete: function(){}
+        // });
+
+      });
+    </script>
   </body>
 </html>
