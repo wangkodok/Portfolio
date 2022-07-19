@@ -54,7 +54,7 @@
       }
   </style>
   </head>
-  <body id="loading" class="loading animsition" data-animsition-in-class="fade-in" data-animsition-in-duration="3000">
+  <body id="loading" class="light loading animsition" data-animsition-in-class="fade-in" data-animsition-in-duration="3000">
 
     <!-- 페이지 로딩 스피너 -->
     <img src="image/login.gif" class="login-loading" alt="login-loading">
@@ -153,6 +153,17 @@
             </div>
           </section>
         </div>
+        
+        <!-- 다크 모드 -->
+        <div class="dark-mode">
+          <button class="btn dark">
+            <span class="blind">다크 모드</span>
+          </button>
+          <button class="btn light on">
+            <span class="blind">라이트 모드</span>
+          </button>
+        </div>
+
       </main>
       <footer class="footer">
         <div class="content-inner">
@@ -199,6 +210,23 @@
           overlayClass : 'animsition-overlay-slide',
           overlayParentElement : 'body',
           transition: function(url){ window.location.href = url; }
+        });
+
+        // 다크 모드 클릭
+        $(".dark-mode .btn").on("click", function() {
+          if($("body").hasClass("light")) {
+            // 다크 모드
+            $("body").addClass("dark");
+            $("body").removeClass("light");
+            $(".dark-mode .dark").show();
+            $(".dark-mode .light").hide();
+          } else {
+            // 라이트 모드
+            $("body").addClass("light");
+            $("body").removeClass("dark");
+            $(".dark-mode .dark").hide();
+            $(".dark-mode .light").show();
+          }
         });
 
         // $("#wrapper").lsPreloader({
