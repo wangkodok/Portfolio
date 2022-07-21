@@ -59,6 +59,38 @@
     <!-- 페이지 로딩 스피너 -->
     <img src="image/login.gif" class="login-loading" alt="login-loading">
 
+    <div class="cursor" style="opacity: 1;">
+    </div>
+    <style>
+      html {
+        cursor: none;
+      }
+      a,
+      button {
+        cursor: none;
+      }
+      .cursor {
+        position: fixed;
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        background-color: #f5f5f5;
+        pointer-events: none;
+        mix-blend-mode: difference;
+        z-index: 9999;
+        transition: all 0.1s none;
+      }
+    </style>
+    <script>
+      	var cursor = $(".cursor");
+        $(window).mousemove(function(e) {
+          cursor.css({
+            top: e.clientY - cursor.height() / 2,
+            left: e.clientX - cursor.width() / 2
+          });
+        });
+    </script>
+
     <div id="wrapper" class="wrapper">
       <header class="header">
         <div class="content-inner">
